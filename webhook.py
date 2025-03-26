@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WEBHOOK_PATH = f"/webhook/{os.getenv('BOT_TOKEN')}"
+
+# Local bot configuration
 LOCAL_BOT_HOST = os.getenv('LOCAL_BOT_HOST', '127.0.0.1')
 LOCAL_BOT_PORT = int(os.getenv('LOCAL_BOT_PORT', 3001))
 
@@ -35,8 +37,5 @@ app = web.Application()
 app.router.add_post(WEBHOOK_PATH, handle_webhook)
 
 if __name__ == '__main__':
-    web.run_app(
-        app,
-        host='0.0.0.0',
-        port=int(os.environ.get('PORT', 8443))
-    )
+    port = int(os.environ.get('PORT', 8443))
+    web.run_app(app, host='0.0.0.0', port=port)
